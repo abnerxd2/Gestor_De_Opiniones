@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { register } from "./auth.Controller.js"
+import { register,login } from "./auth.Controller.js"
 import { registerValidator, assignClientRole } from "../middlewere/user-validator.js"
 
 const router = Router();
@@ -11,5 +11,11 @@ router.post(
     assignClientRole,
     register
 );
+
+
+router.post(
+    "/login",
+    login
+)
 
 export default router;

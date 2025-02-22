@@ -11,6 +11,11 @@ const categorySchema = Schema({
     type: String,
     required: true,
   },
+  srtatus:{
+    type: String,
+    enum: ["Activa", "Inactiva"],
+    default: "Activa",
+  }
 });
 
 export default model("Category", categorySchema);

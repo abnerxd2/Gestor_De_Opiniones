@@ -6,9 +6,10 @@ import helmet from "helmet"
 import morgan from "morgan"
 import { dbConnection } from "./mongo.js"
 import apiLimiter from "../src/middlewere/rate_limit_validator.js"
-import userRoutes from "../src/auth/auth.routes.js"
+import authRoutes from "../src/auth/auth.routes.js"
 import categoryRoutes from "../src/category/category.routes.js"
 import createAdmin from "../src/auth/auth.Controller.js"
+import userRoutes from "../src/user/user.routes.js"
 
 
 
@@ -22,8 +23,9 @@ const middlewares = (app) => {
 }
 
 const routes = (app) =>{
-    app.use("/GestorOpiniones/v1/auth",userRoutes)
+    app.use("/GestorOpiniones/v1/auth",authRoutes)
     app.use("/GestorOpiniones/v1/category",categoryRoutes)
+    app.use("/GestorOpiniones/v1/user",userRoutes)
 }
 
 const conectarDB = async () =>{

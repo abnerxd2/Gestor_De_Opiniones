@@ -8,7 +8,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export const getUserById = async (req, res) => {
     try{
-        const { uid } = req.params;
+        const { uid } = req.body;
         const user = await User.findById(uid)
 
         if(!user){
@@ -60,38 +60,47 @@ export const getUsers = async (req, res) => {
 
 
 export const updatePassword = async (req, res) => {
-    try{
-        const { uid } = req.params
-        const { newPassword } = req.body
+    try {
+        const { newPassword } = req.body;
 
-        const user = await User.findById(uid)
-
-        const matchOldAndNewPassword = await verify(user.password, newPassword)
-
-        if(matchOldAndNewPassword){
+    
+        if (!newPassword) {
             return res.status(400).json({
                 success: false,
-                message: "La nueva contraseña no puede ser igual a la anterior"
-            })
+                message: "La nueva contraseña es requerida."
+            });
+        }
+        const user = req.usuario;
+
+        const matchOldAndNewPassword = await verify(user.password, newPassword);
+        if (matchOldAndNewPassword) {
+            return res.status(400).json({
+                success: false,
+                message: "La nueva contraseña no puede ser igual a la anterior."
+            });
         }
 
-        const encryptedPassword = await hash(newPassword)
+        const encryptedPassword = await hash(newPassword);
 
-        await User.findByIdAndUpdate(uid, {password: encryptedPassword}, {new: true})
+        user.password = encryptedPassword;
+        await user.save();
 
         return res.status(200).json({
             success: true,
-            message: "Contraseña actualizada",
-        })
+            message: "Contraseña actualizada exitosamente."
+        });
 
-    }catch(err){
+    } catch (err) {
         return res.status(500).json({
             success: false,
-            message: "Error al actualizar contraseña",
+            message: "Error al actualizar la contraseña.",
             error: err.message
-        })
+        });
     }
-}
+};
+
+
+
 
 export const updateUser = async (req, res) => {
     try {
@@ -114,38 +123,46 @@ export const updateUser = async (req, res) => {
     }
 }
 
-export const updateProfilePicture = async (req, res) => {
-    try{
-        const { uid } = req.params
-        let newProfilePicture = req.file ? req.file.filename : null
+export const deactivateUser  = async (req, res) => {
+    try {
+        const { password } = req.body; 
 
-        if(!newProfilePicture){
+
+        if (!password) {
             return res.status(400).json({
                 success: false,
-                message: "No hay archivo en la petición"
-            })
+                message: "Se requiere la contraseña para realizar esta acción."
+            });
         }
 
-        const user = await User.findById(uid)
+      
+        const user = req.usuario; 
 
-        if(user.profilePicture){
-            const oldProfilePicture = join(__dirname, "../../public/uploads/profile-pictures", user.profilePicture)
-            await fs.unlink(oldProfilePicture)
+     
+        const isPasswordValid = await verify(user.password, password);  
+
+        if (!isPasswordValid) {
+            return res.status(401).json({
+                success: false,
+                message: "La contraseña es incorrecta."
+            });
         }
 
-        user.profilePicture = newProfilePicture
-        await user.save()
+    
+        user.status = "inactivo"; 
+
+       
+        await user.save();
 
         return res.status(200).json({
             success: true,
-            message: "Foto actualizada",
-            profilePicture: user.profilePicture,
-        })
-    }catch(err){
+            message: "El estado del usuario ha sido cambiado a inactivo."
+        });
+    } catch (err) {
         return res.status(500).json({
             success: false,
-            message: "Error al actualizar la foto",
+            message: "Error al cambiar el estado del usuario.",
             error: err.message
-        })
+        });
     }
-}
+};

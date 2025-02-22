@@ -20,6 +20,7 @@ export const registerValidator = [
     handleErrors
 ]
 
+
 export const loginValidator = [
     body("email").optional().isEmail().withMessage("No es un email válido"),
     body("username").optional().isString().withMessage("Username es en formáto erróneo"),
