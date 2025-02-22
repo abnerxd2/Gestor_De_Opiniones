@@ -1,0 +1,560 @@
+{
+	"info": {
+		"_postman_id": "48471b8f-a0a6-4c7c-a053-5eb09c08f7e5",
+		"name": "Gestor de comentarios",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "37641996"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "registro",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Juan\",\r\n  \"surname\": \"Pérez\",\r\n  \"username\": \"juanperez123\",\r\n  \"email\": \"juan.perez@example.com\",\r\n  \"password\": \"pass123\",\r\n  \"phone\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3005/GestorOpiniones/v1/auth/register"
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"juanperez123\",\r\n    \"password\": \"pass123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3005/GestorOpiniones/v1/auth/login"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "usuario",
+			"item": [
+				{
+					"name": "DesactivarMicuenta",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/gestorDeComentarios/v1/user/findUser/:uid",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"gestorDeComentarios",
+								"v1",
+								"user",
+								"findUser",
+								":uid"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": "67b7b78856fa9d36666e41f1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listar usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://127.0.0.1:3000/gestorDeComentarios/v1/user/"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "categoria",
+			"item": [
+				{
+					"name": "agregar categoria",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"Zelda\",\r\n    \"descripcion\": \"breath of te kindom es el mejor\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:3000/gestorDeComentarios/v1/categoria/agregarCategoria"
+					},
+					"response": []
+				},
+				{
+					"name": "buscar categoria",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I3Yjc4ODU2ZmE5ZDM2NjY2ZTQxZjEiLCJpYXQiOjE3NDAxMDkxNjAsImV4cCI6MTc0MDExMjc2MH0.uGmJB16bJ0YvCLeEU72k2y-SJys9DDPAkUk70OznqDI"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/gestorDeComentarios/v1/categoria/buscarCategoria/:uid",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"gestorDeComentarios",
+								"v1",
+								"categoria",
+								"buscarCategoria",
+								":uid"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": "67b7c2f01d86b7318c4f31de"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizar categoria",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I3Yjc4ODU2ZmE5ZDM2NjY2ZTQxZjEiLCJpYXQiOjE3NDAxMDkxNjAsImV4cCI6MTc0MDExMjc2MH0.uGmJB16bJ0YvCLeEU72k2y-SJys9DDPAkUk70OznqDI"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"modelaje 3d\",\r\n    \"descripcion\": \"blender\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/gestorDeComentarios/v1/categoria/actualizarCategoria/:uid",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"gestorDeComentarios",
+								"v1",
+								"categoria",
+								"actualizarCategoria",
+								":uid"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": "67b7c2f01d86b7318c4f31de"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eliminar categoria",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I3Yjc4ODU2ZmE5ZDM2NjY2ZTQxZjEiLCJpYXQiOjE3NDAxMDkxNjAsImV4cCI6MTc0MDExMjc2MH0.uGmJB16bJ0YvCLeEU72k2y-SJys9DDPAkUk70OznqDI"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/gestorDeComentarios/v1/categoria/borrarCategoria/:uid",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"gestorDeComentarios",
+								"v1",
+								"categoria",
+								"borrarCategoria",
+								":uid"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": "67b7c2f01d86b7318c4f31de"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "comentario",
+			"item": [
+				{
+					"name": "agregar comentario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I3Yjc4ODU2ZmE5ZDM2NjY2ZTQxZjEiLCJpYXQiOjE3NDAxMDkxNjAsImV4cCI6MTc0MDExMjc2MH0.uGmJB16bJ0YvCLeEU72k2y-SJys9DDPAkUk70OznqDI"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"no es el mejor juego\",\r\n    \"contenido\": \"el mejor es maincra\",\r\n    \"autor\": \"67b7b78856fa9d36666e41f1\",\r\n    \"uidpublicacion\": \"67b7ec7051daaa566fdd3e49\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:3000/gestorDeComentarios/v1/comentario/agregarComentario"
+					},
+					"response": []
+				},
+				{
+					"name": "actualizar comentario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I3Yjc4ODU2ZmE5ZDM2NjY2ZTQxZjEiLCJpYXQiOjE3NDAxMDkxNjAsImV4cCI6MTc0MDExMjc2MH0.uGmJB16bJ0YvCLeEU72k2y-SJys9DDPAkUk70OznqDI"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"no es el mejor juego\",\r\n    \"contenido\": \"el mejor es maincra\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/gestorDeComentarios/v1/comentario/actualizarComentario/:uid",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"gestorDeComentarios",
+								"v1",
+								"comentario",
+								"actualizarComentario",
+								":uid"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": "67b7ed45aa71281d9f3aebeb"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eliminar comentario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I3Yjc4ODU2ZmE5ZDM2NjY2ZTQxZjEiLCJpYXQiOjE3NDAxMDkxNjAsImV4cCI6MTc0MDExMjc2MH0.uGmJB16bJ0YvCLeEU72k2y-SJys9DDPAkUk70OznqDI"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/gestorDeComentarios/v1/comentario/eliminarComentario/:uid",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"gestorDeComentarios",
+								"v1",
+								"comentario",
+								"eliminarComentario",
+								":uid"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": "67b7ed45aa71281d9f3aebeb"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Publicaciones",
+			"item": [
+				{
+					"name": "agregar publicacion",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I3Yjc4ODU2ZmE5ZDM2NjY2ZTQxZjEiLCJpYXQiOjE3NDAxMDkxNjAsImV4cCI6MTc0MDExMjc2MH0.uGmJB16bJ0YvCLeEU72k2y-SJys9DDPAkUk70OznqDI"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"El mejor juego\",\r\n    \"contenido\": \"objetivamente es halo 2\",\r\n    \"autor\": \"67b7b78856fa9d36666e41f1\",\r\n    \"categoria\": \"67b7c2f01d86b7318c4f31de\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:3000/gestorDeComentarios/v1/publicacion/agregarPublicaicon"
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Publicacion",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I3Yjc4ODU2ZmE5ZDM2NjY2ZTQxZjEiLCJpYXQiOjE3NDAxMDkxNjAsImV4cCI6MTc0MDExMjc2MH0.uGmJB16bJ0YvCLeEU72k2y-SJys9DDPAkUk70OznqDI"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"Valorant \",\r\n    \"contenido\": \"las skins son caras\",\r\n    \"categoria\": \"67b7c2f01d86b7318c4f31de\",\r\n    \"uidAutor\": \"67b7b78856fa9d36666e41f1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/gestorDeComentarios/v1/publicacion/actualizarPublicacion/:uid",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"gestorDeComentarios",
+								"v1",
+								"publicacion",
+								"actualizarPublicacion",
+								":uid"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": "67b7f329c897de21b6c570e5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Publicacion",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I3Yjc4ODU2ZmE5ZDM2NjY2ZTQxZjEiLCJpYXQiOjE3NDAxMDkxNjAsImV4cCI6MTc0MDExMjc2MH0.uGmJB16bJ0YvCLeEU72k2y-SJys9DDPAkUk70OznqDI"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"modelaje 3d\",\r\n    \"descripcion\": \"blender\",\r\n    \"uidAutor\": \"67b7b78856fa9d36666e41f1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/gestorDeComentarios/v1/publicacion/eliminarPublicacion/:uid",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"gestorDeComentarios",
+								"v1",
+								"publicacion",
+								"eliminarPublicacion",
+								":uid"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": "67b7ec7051daaa566fdd3e49"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Publicacion",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I3Yjc4ODU2ZmE5ZDM2NjY2ZTQxZjEiLCJpYXQiOjE3NDAxMDkxNjAsImV4cCI6MTc0MDExMjc2MH0.uGmJB16bJ0YvCLeEU72k2y-SJys9DDPAkUk70OznqDI"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"modelaje 3d\",\r\n    \"descripcion\": \"blender\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/gestorDeComentarios/v1/publicacion/buscarPublicacion/:uid",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"gestorDeComentarios",
+								"v1",
+								"publicacion",
+								"buscarPublicacion",
+								":uid"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": "67b7b78856fa9d36666e41f1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

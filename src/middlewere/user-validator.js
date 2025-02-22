@@ -1,6 +1,7 @@
 import { body} from "express-validator";
 import { emailExists, usernameExists} from "../helpers/db_validator.js";
 import { handleErrors } from "./handle_errors.js";
+import {hasRoles} from "../middlewere/validate_roles.js"
 
 export const registerValidator = [
     body("name").notEmpty().withMessage("El nombre es requerido"),
@@ -26,6 +27,10 @@ export const loginValidator = [
     body("username").optional().isString().withMessage("Username es en formáto erróneo"),
     body("password").isLength({min: 4}).withMessage("El password debe contener al menos 8 caracteres"),
     handleErrors
+]
+
+export const DeleteUser =[
+    hasRoles("ADMIN_ROLE"),
 ]
 
 export const assignClientRole = (req, res, next) => {

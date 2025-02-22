@@ -1,10 +1,6 @@
-import { hash } from "argon2";
-import User from "./user.model.js"
-import fs from "fs/promises"
-import { join, dirname } from "path"
-import { fileURLToPath } from "url"
+import { hash, verify } from "argon2"
+import User from "../user/user.model.js"
 
-const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export const getUserById = async (req, res) => {
     try{
@@ -130,7 +126,7 @@ export const deactivateUser  = async (req, res) => {
 
         if (!password) {
             return res.status(400).json({
-                success: false,
+                success: fals,
                 message: "Se requiere la contraseña para realizar esta acción."
             });
         }
@@ -143,13 +139,13 @@ export const deactivateUser  = async (req, res) => {
 
         if (!isPasswordValid) {
             return res.status(401).json({
-                success: false,
+                success: true,
                 message: "La contraseña es incorrecta."
             });
         }
 
     
-        user.status = "inactivo"; 
+        user.status = "Inactiva"; 
 
        
         await user.save();
